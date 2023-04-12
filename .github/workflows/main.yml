@@ -1,7 +1,0 @@
-# Configurações do módulo PyDimensions
-modulos:
-  - nome: PyDimensions
-    caminho: source/main.py
-    parametros:
-      - largura_tela: 800
-      - altura_tela: 600
