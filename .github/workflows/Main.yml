@@ -24,7 +24,6 @@ jobs:
     - name: Install dependencies
       run: |
         pip install --upgrade pip
-        pip install -r requirements.txt  # Instala as dependências do módulo Python
 
     - name: Build
       run: python setup.py build  # Constrói o módulo Python
