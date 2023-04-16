@@ -1,0 +1,43 @@
+name: Build and Test
+
+on:
+  push:
+    branches:
+      - main  # Fluxo de trabalho será acionado em push para o ramo main
+  pull_request:
+    branches:
+      - main  # Fluxo de trabalho será acionado em pull requests para o ramo main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Define o sistema operacional para executar o fluxo de trabalho
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2  # Ação para fazer o checkout do repositório
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9  # Especifica a versão do Python a ser usada
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt  # Instala as dependências do módulo Python
+
+    - name: Build
+      run: python setup.py build  # Constrói o módulo Python
+
+    - name: Test
+      run: python -m unittest discover  # Executa os testes do módulo Python
+
+    - name: Package
+      run: python setup.py sdist bdist_wheel  # Empacota o módulo Python em um pacote
+      env:
+        TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}  # Variável de ambiente para o nome de usuário do Twine
+        TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}  # Variável de ambiente para a senha do Twine
+
+    - name: Publish
+      run: twine upload dist/*  # Faz o upload do pacote para o PyPI usando o Twine
+      env:
+        TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}  # Variável de ambiente para o nome de usuário do Twine
+        TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}  # Variável de ambiente para a senha do Twine
