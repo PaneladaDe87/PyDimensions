@@ -22,7 +22,7 @@ jobs:
         python-version: 3.9  # Especifica a versão do Python a ser usada
 
     - name: Install dependencies
-      pip install --upgrade pip
+      run: pip install --upgrade pip
       run: pip install -r requirements.txt  # Instala as dependências do módulo Python
 
     - name: Build
