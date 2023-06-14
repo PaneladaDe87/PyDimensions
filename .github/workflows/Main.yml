@@ -38,8 +38,8 @@ jobs:
     - name: Package
       run: python setup.py sdist bdist_wheel  # Empacota o módulo Python em um pacote
       env:
-        TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}  # Variável de ambiente para o nome de usuário do Twine
-        TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}  # Variável de ambiente para a senha do Twine
+        TWINE_USERNAME: ${{ secrets.USERNAME }}  # Variável de ambiente para o nome de usuário do Twine
+        TWINE_PASSWORD: ${{ secrets.PASSWORD }}  # Variável de ambiente para a senha do Twine
 
     - name: Publish
       run: twine upload dist/*  # Faz o upload do pacote para o PyPI usando o Twine
